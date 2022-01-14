@@ -40,6 +40,10 @@ img = cv2.imread('Images/persondetectionimage1.jpg')
 img2 = cv2.imread('Images/persondetectionimage2.jpg')
 img3 = cv2.imread('Images/persondetectionimage3.jpg')
 
+orginalimg = cv2.imread('Images/persondetectionimage1.jpg')
+orginalimg2 = cv2.imread('Images/persondetectionimage2.jpg')
+orginalimg3 = cv2.imread('Images/persondetectionimage3.jpg')
+
 ClassIndex, confidece, bbox = model.detect(img, confThreshold=0.52)
 ClassIndex2, confidece2, bbox2 = model.detect(img2, confThreshold=0.5)
 ClassIndex3, confidece3, bbox3 = model.detect(img3, confThreshold=0.54)
@@ -61,8 +65,12 @@ imgboxesdraw(ClassIndex, confidece, bbox, img)
 imgboxesdraw(ClassIndex2, confidece2, bbox2, img2)
 imgboxesdraw(ClassIndex3, confidece3, bbox3, img3)
 
-cv2.imshow(count_person(ClassIndex, 1), img)
-cv2.imshow(count_person(ClassIndex2, 2), img2)
-cv2.imshow(count_person(ClassIndex3, 3), img3)
+imgHor = np.hstack((img,orginalimg))
+imgHor2 = np.hstack((img2,orginalimg2))
+imgHor3 = np.hstack((img3,orginalimg3))
+
+cv2.imshow(count_person(ClassIndex, 1), imgHor)
+cv2.imshow(count_person(ClassIndex2, 2), imgHor2)
+cv2.imshow(count_person(ClassIndex3, 3), imgHor3)
 # plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB)) // plot display
 cv2.waitKey()
